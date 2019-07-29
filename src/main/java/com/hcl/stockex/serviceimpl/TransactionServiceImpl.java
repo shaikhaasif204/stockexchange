@@ -32,7 +32,7 @@ public class TransactionServiceImpl implements TransactionService{
 		responseDTO.setMessage("List of Past Purchase Tradings");
 		responseDTO.setData(purchaseResponseDTOList);
 		
-		return null;
+		return responseDTO;
 	}
 
 	
