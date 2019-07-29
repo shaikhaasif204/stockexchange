@@ -3,6 +3,8 @@ package com.hcl.stockex.serviceimpl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ import com.hcl.stockex.service.StockService;
 @Service
 public class StockServiceImpl implements StockService {
 
+	private static final Logger logger = LoggerFactory.getLogger(StockServiceImpl.class);
+	
 	@Autowired
 	StockRepository stockRepository;
 
@@ -38,6 +42,8 @@ public class StockServiceImpl implements StockService {
 			responseDTO.setHttpStatus(HttpStatus.OK);
 			responseDTO.setMessage("No stocks found");
 		}
+		logger.info("Returing reponse for get All Stock Details.");
+
 		return responseDTO;
 	}
 	
