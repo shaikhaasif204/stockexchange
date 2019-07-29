@@ -29,26 +29,9 @@ public class User {
 	private String name;
 
 
-	@Column(name = "address")
-	private String address;
+	@Column(name = "acc_no")
+	private String accNo;
 
-	@Column(name = "phone_number")
-	private String phoneNumber;
-
-	@Column(name = "username", unique = true, nullable = false)
-	private String username;
-
-	@Column(name = "password", nullable = false)
-	private String password;
-
-	@Column(name = "email")
-	private String email;
-
-	@Column(name = "gender")
-	private String gender;
-
-	@Column(name = "date_of_birth")
-	private LocalDate dOB;
 	
 
 }
