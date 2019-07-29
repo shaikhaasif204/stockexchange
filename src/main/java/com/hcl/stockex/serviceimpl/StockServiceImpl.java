@@ -29,7 +29,7 @@ public class StockServiceImpl implements StockService {
 		
 		ResponseDTO responseDTO = new ResponseDTO();
 		List<Stock> stockList = stockRepository.findAll();
-		if (stockList.isEmpty() )  {
+		if (!stockList.isEmpty() )  {
 			
 			List<StockResponseDTO> stockResponseDTOList = stockList.stream()
 					.map(i -> new StockResponseDTO(i.getId(), i.getStockName(), i.getStockType(), i.getRegion(), i.getMarketOpen(), i.getMarketClose(), i.getPurchasePrice()))
