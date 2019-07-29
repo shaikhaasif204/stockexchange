@@ -18,8 +18,7 @@ public class TransactionController {
 	@Autowired
 	TransactionServiceImpl transactionServiceImpl;
 	
-	@GetMapping
-	@RequestMapping(value = "/history")
+	@GetMapping(value = "/history")
 	public ResponseEntity<ResponseDTO> getHistory(@RequestParam Long userId) {
 		ResponseDTO returnedResponse = transactionServiceImpl.getHistory(userId);
 		return new ResponseEntity<ResponseDTO>(returnedResponse, HttpStatus.OK);

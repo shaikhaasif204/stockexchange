@@ -23,7 +23,7 @@ public class Stock {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 
 	@Column(name = "stock_name")
 	private String stockName;
