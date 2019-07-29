@@ -37,7 +37,7 @@ private User user;
 private Stock stock;
 
 @Column(name = "quantity")
-private Long quantity;
+private Integer quantity;
 
 @Column(name = "stock_price")
 private Double stockPrice;
