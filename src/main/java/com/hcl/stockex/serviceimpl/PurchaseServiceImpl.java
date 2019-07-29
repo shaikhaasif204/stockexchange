@@ -107,5 +107,51 @@ public class PurchaseServiceImpl implements PurchaseService {
 		return responseDTO;
 	}
 
+	@Override
+	public PurchaseResponseDTO completeTrnx(PurchaseRequestDTO purchaseReqDTO) throws ApplicationException {
+		StockTransaction stockTrnx = stockTransactionRepository.getTrnxByUserIdAndStockId(purchaseReqDTO.getUserId(),
+				purchaseReqDTO.getStockId());
+		Stock stock = null;
+		PurchaseResponseDTO purchaseResponseDTO = null;
+		if (null != stockTrnx) {
+			if (RequestStatusUtil.EXECUTED == purchaseReqDTO.getStatus()
+					|| RequestStatusUtil.DECLINED == purchaseReqDTO.getStatus()) {
+				System.out.println("::::::::::::::::::::::::::::: "+stockTrnx.getStatus());
+				if (RequestStatusUtil.REVIEWED == purchaseReqDTO.getStatus()) {
+					Optional<Stock> stockOptional = stockRepository.findById(purchaseReqDTO.getStockId());
+					if (stockOptional.isPresent()) {
+						stock = stockOptional.get();
+					} else {
+						throw new ApplicationException("Stock id is not valid");
+					}
+					stockTrnx.setStatus(purchaseReqDTO.getStatus());
+					Double stockPrice = stock.getExecutePrice();
+					int stockQuantity = purchaseReqDTO.getQuantityOfStock();
+					stockTrnx.setQuantity(stockQuantity);
+					stockTrnx.setStockPrice(stockPrice);
+					Double totalPrice = purchaseReqDTO.getQuantityOfStock() * stockPrice;
+					stockTrnx.setTotalPrice(totalPrice);
+					stockTransactionRepository.save(stockTrnx);
+					purchaseResponseDTO = new PurchaseResponseDTO();
+					purchaseResponseDTO.setPerStockPrice(stockPrice);
+					purchaseResponseDTO.setQuantityOfStock(stockQuantity);
+					purchaseResponseDTO.setStockId(stock.getId());
+					purchaseResponseDTO.setStockName(stock.getStockName());
+					purchaseResponseDTO.setStockType(stock.getStockType());
+					purchaseResponseDTO.setTotalprice(totalPrice);
+					purchaseResponseDTO.setUserId(purchaseReqDTO.getUserId());
+
+				} else {
+					throw new ApplicationException("Transaction is not valid");
+				}
+			} else {
+				throw new ApplicationException("Transaction is not valid");
+			}
+
+		} else {
+			throw new ApplicationException("No transaaction for requested information");
+		}
+		return purchaseResponseDTO;
+	}
 
 }

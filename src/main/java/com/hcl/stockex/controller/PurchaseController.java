@@ -32,6 +32,10 @@ public class PurchaseController {
 		return new ResponseEntity<>(purchaseService.purchaseStock(purchaseRequestDTO), HttpStatus.OK);
 	}
 	
+	@PutMapping("/executed")
+	public ResponseEntity<Object> executedTrnx(@RequestBody PurchaseRequestDTO purchaseRequestDTO ) throws ApplicationException{
+		return new ResponseEntity<Object>(purchaseService.completeTrnx(purchaseRequestDTO), HttpStatus.OK);
+	}
 	@PutMapping("/review")
 	public ResponseEntity<Object> reviewPurchase(@RequestBody PurchaseRequestDTO purchaseRequestDTO) throws ApplicationException{
 		validateRequest(purchaseRequestDTO);
