@@ -45,17 +45,17 @@ public class PurchaseController {
 	
 	private void validateRequest(PurchaseRequestDTO purchaseRequestDTO) throws ApplicationException{
 		
-		  if(StringUtils.isEmpty(purchaseRequestDTO.getUserId())) { 
+		  if(StringUtils.isEmpty(purchaseRequestDTO.getStockName())) { 
 			  throw new ApplicationException(ERROR_MSG + "UserId"); 
 			  } 
 		  if(null == purchaseRequestDTO.getStockId()) {
 			  throw new ApplicationException(ERROR_MSG + "Stock Id"); 
 			  } 
-		  if(null == purchaseRequestDTO.getStockName()) { 
+		  if(null == purchaseRequestDTO.getUserId()) { 
 			  throw new ApplicationException(ERROR_MSG + "Stock name");
 			  } 
 		  
-		  if(null == purchaseRequestDTO.getQuantityOfStock()) { 
+		  if(null == purchaseRequestDTO.getQuantityOfStock() || 0 >= purchaseRequestDTO.getQuantityOfStock()) { 
 			  throw new ApplicationException(ERROR_MSG + "Quantity of Stock"); 
 			  }
 		  
