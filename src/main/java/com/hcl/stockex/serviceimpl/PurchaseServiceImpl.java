@@ -117,7 +117,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 			if (RequestStatusUtil.EXECUTED == purchaseReqDTO.getStatus()
 					|| RequestStatusUtil.DECLINED == purchaseReqDTO.getStatus()) {
 				System.out.println("::::::::::::::::::::::::::::: "+stockTrnx.getStatus());
-				if (RequestStatusUtil.REVIEWED == purchaseReqDTO.getStatus()) {
+				if (RequestStatusUtil.REVIEWED == stockTrnx.getStatus()) {
 					Optional<Stock> stockOptional = stockRepository.findById(purchaseReqDTO.getStockId());
 					if (stockOptional.isPresent()) {
 						stock = stockOptional.get();
@@ -142,7 +142,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 					purchaseResponseDTO.setUserId(purchaseReqDTO.getUserId());
 
 				} else {
-					throw new ApplicationException("Transaction is not valid");
+					throw new ApplicationException("Provided transaction is not valid");
 				}
 			} else {
 				throw new ApplicationException("Transaction is not valid");
