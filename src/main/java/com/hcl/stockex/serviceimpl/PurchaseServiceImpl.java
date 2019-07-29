@@ -25,7 +25,6 @@ import com.hcl.stockex.util.RequestStatusUtil;
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(PurchaseServiceImpl.class);
 
 	@Autowired
 	StockTransactionRepository stockTransactionRepository;
