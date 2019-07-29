@@ -2,9 +2,12 @@ package com.hcl.stockex.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -24,12 +27,14 @@ public class StockTransaction {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;
 
-@Column(name = "user_id", nullable = false)
-private User userId;
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "user_id")
+private User user;
 
 
-@Column(name = "stock_id")
-private Stock stockId;
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "stock_id")
+private Stock stock;
 
 @Column(name = "quantaty")
 private Long quantaty;
