@@ -37,8 +37,16 @@ public class StockServiceImplTest {
 	}
 	
 	@Test
-	public void testgetAllStockDetails() throws ApplicationException {
+	public void testgetAllStockDetailsNoDetails() throws ApplicationException {
 		
+		Mockito.when(stockRepositoryMock.findAll()).thenReturn(stockList);
+		assertNotNull(stockServiceImpl.getAllStockDetails());
+		
+	}
+	
+	@Test
+	public void testgetAllStockDetailsWithDetails() throws ApplicationException {
+		stockList.add(new Stock());
 		Mockito.when(stockRepositoryMock.findAll()).thenReturn(stockList);
 		assertNotNull(stockServiceImpl.getAllStockDetails());
 		
