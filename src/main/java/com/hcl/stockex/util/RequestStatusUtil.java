@@ -1,6 +1,8 @@
 package com.hcl.stockex.util;
 
 public class RequestStatusUtil {
+	
+	
 
 	public static final Integer INITIATED = 0;
 	public static final Integer REVIEWED = 1;

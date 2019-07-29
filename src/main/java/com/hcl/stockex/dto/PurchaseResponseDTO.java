@@ -9,32 +9,32 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PurchaseResponseDTO {
 	
-	private Long UserId;
+	private Long userId;
 	
-	private Long StockId;
+	private Long stockId;
 	
 	private String stockName;
 
 	private String stockType;
 	
-	private Double Totalprice;
+	private Double totalprice;
 	
-	private Double PerStockPrice;
+	private Double perStockPrice;
 	
-	private Integer QuantityOfStock;
+	private Integer quantityOfStock;
 	
 	private Integer status;
 
 	public PurchaseResponseDTO(Long userId, Long stockId, String stockName, String stockType, Double totalprice,
 			Double perStockPrice, Integer quantityOfStock) {
 		super();
-		UserId = userId;
-		StockId = stockId;
+		userId = userId;
+		stockId = stockId;
 		this.stockName = stockName;
 		this.stockType = stockType;
-		Totalprice = totalprice;
-		PerStockPrice = perStockPrice;
-		QuantityOfStock = quantityOfStock;
+		totalprice = totalprice;
+		perStockPrice = perStockPrice;
+		quantityOfStock = quantityOfStock;
 	}
 
 }
