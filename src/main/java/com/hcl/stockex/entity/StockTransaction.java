@@ -36,8 +36,8 @@ private User user;
 @JoinColumn(name = "stock_id")
 private Stock stock;
 
-@Column(name = "quantaty")
-private Long quantaty;
+@Column(name = "quantity")
+private Long quantity;
 
 @Column(name = "stock_price")
 private Double stockPrice;
