@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hcl.stockex.dto.PurchaseRequestDTO;
 import com.hcl.stockex.dto.PurchaseResponseDTO;
+import com.hcl.stockex.dto.ResponseDTO;
 import com.hcl.stockex.entity.StockTransaction;
 import com.hcl.stockex.repository.StockTransactionRepository;
 import com.hcl.stockex.service.PurchaseService;
@@ -27,6 +28,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 			transaction.setStatus(RequestStatusUtil.REVIEWED);
 			stockTransactionRepository.save(transaction);
 		}
+
+
+	@Override
+	public ResponseDTO purchaseStock(PurchaseRequestDTO purchaseRequestDTO) throws ApplicationException {
+		
 		return null;
 	}
 
