@@ -32,7 +32,7 @@ public class TransactionServiceImpl implements TransactionService{
 			List<StockTransaction> history = stockTransactionRepository.findAllByUserId(userId, RequestStatusUtil.EXECUTED);
 			
 			List<PurchaseResponseDTO> purchaseResponseDTOList = history.stream().map(i -> new PurchaseResponseDTO(i.getUser().getId(),i.getStock().getId(),
-					i.getStock().getStockName(),i.getStock().getStockType(),i.getTotalPrice(),i.getStockPrice(),i.getQuantity())).collect(Collectors.toList());
+					i.getStock().getStockName(),i.getStock().getStockType(),i.getTotalPrice(),i.getStockPrice(),i.getQuantity(),i.getStatus())).collect(Collectors.toList());
 			responseDTO.setHttpStatus(HttpStatus.OK);
 			responseDTO.setMessage("List of Past Purchase Tradings");
 			responseDTO.setData(purchaseResponseDTOList);

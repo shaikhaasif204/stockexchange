@@ -22,11 +22,13 @@ public class TransactionController {
 	
 	
 	@GetMapping(value = "/history")
-	public ResponseEntity<ResponseDTO> getHistory(@RequestParam Long userId) throws ApplicationException {
-		if(null == userId)
+	public ResponseEntity<Object> getHistory(@RequestParam Long userId) throws ApplicationException {
+		if(null == userId) {
 		throw new ApplicationException("user Id cannot be empty");
+		}
+		
 		ResponseDTO returnedResponse = transactionServiceImpl.getHistory(userId);
-		return new ResponseEntity<ResponseDTO>(returnedResponse, HttpStatus.OK);
+		return new ResponseEntity<>(returnedResponse, HttpStatus.OK);
 		
 	}
 	

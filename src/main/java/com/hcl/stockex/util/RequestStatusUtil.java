@@ -1,6 +1,10 @@
 package com.hcl.stockex.util;
 
 public class RequestStatusUtil {
+	
+	private RequestStatusUtil() {
+	    throw new IllegalStateException("Utility class");
+	  }
 
 	public static final Integer INITIATED = 0;
 	public static final Integer REVIEWED = 1;

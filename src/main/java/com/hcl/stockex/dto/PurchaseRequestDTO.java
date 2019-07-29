@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PurchaseRequestDTO {
 	
-    private Long UserId;
+    private Long userId;
 	
-	private Long StockId;
+	private Long stockId;
 	
 	private String stockName;
 	
-	private Integer QuantityOfStock;
+	private Integer quantityOfStock;
 	
 	private Integer status;
 

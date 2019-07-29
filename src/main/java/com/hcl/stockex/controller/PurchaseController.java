@@ -23,6 +23,7 @@ public class PurchaseController {
 	@Autowired
 	PurchaseService purchaseService;
 	
+	
 	private static final String ERROR_MSG = "Mandetory Element missing : ";
 	
 	
@@ -34,7 +35,7 @@ public class PurchaseController {
 	
 	@PutMapping("/executed")
 	public ResponseEntity<Object> executedTrnx(@RequestBody PurchaseRequestDTO purchaseRequestDTO ) throws ApplicationException{
-		return new ResponseEntity<Object>(purchaseService.completeTrnx(purchaseRequestDTO), HttpStatus.OK);
+		return new ResponseEntity<>(purchaseService.completeTrnx(purchaseRequestDTO), HttpStatus.OK);
 	}
 	@PutMapping("/review")
 	public ResponseEntity<Object> reviewPurchase(@RequestBody PurchaseRequestDTO purchaseRequestDTO) throws ApplicationException{

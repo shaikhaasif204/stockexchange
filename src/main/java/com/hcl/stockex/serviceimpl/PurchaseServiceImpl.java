@@ -2,6 +2,8 @@ package com.hcl.stockex.serviceimpl;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ import com.hcl.stockex.util.RequestStatusUtil;
 
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
+	
 
 	@Autowired
 	StockTransactionRepository stockTransactionRepository;
@@ -39,7 +42,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 		Optional<StockTransaction> stockTransaction = stockTransactionRepository.getTransactionByUserIdAndStockId(purchaseRequestDTO.getUserId(), purchaseRequestDTO.getStockId(), RequestStatusUtil.INITIATED);
 		if(stockTransaction.isPresent()) {
 			StockTransaction transaction = stockTransaction.get();
-			PurchaseResponseDTO purchaseResponseDTO = new PurchaseResponseDTO(transaction.getUser().getId(), transaction.getStock().getId(), transaction.getStock().getStockName(), transaction.getStock().getStockType(), (transaction.getStock().getConfirmPrice()*transaction.getQuantity()), transaction.getStock().getConfirmPrice(), transaction.getQuantity());
+			PurchaseResponseDTO purchaseResponseDTO = new PurchaseResponseDTO(transaction.getUser().getId(), transaction.getStock().getId(), transaction.getStock().getStockName(), transaction.getStock().getStockType(), (transaction.getStock().getConfirmPrice()*transaction.getQuantity()), transaction.getStock().getConfirmPrice(), transaction.getQuantity(),transaction.getStatus());
 			transaction.setStatus(RequestStatusUtil.REVIEWED);
 			stockTransactionRepository.save(transaction);
 			responseDTO.setMessage("Review your order");
@@ -114,10 +117,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 		Stock stock = null;
 		PurchaseResponseDTO purchaseResponseDTO = null;
 		if (null != stockTrnx) {
-			if (RequestStatusUtil.EXECUTED == purchaseReqDTO.getStatus()
-					|| RequestStatusUtil.DECLINED == purchaseReqDTO.getStatus()) {
-				System.out.println("::::::::::::::::::::::::::::: "+stockTrnx.getStatus());
-				if (RequestStatusUtil.REVIEWED == purchaseReqDTO.getStatus()) {
+			if (RequestStatusUtil.EXECUTED.equals(purchaseReqDTO.getStatus()) 
+					|| RequestStatusUtil.DECLINED.equals(purchaseReqDTO.getStatus())) {
+				if (RequestStatusUtil.REVIEWED.equals(stockTrnx.getStatus())) {
 					Optional<Stock> stockOptional = stockRepository.findById(purchaseReqDTO.getStockId());
 					if (stockOptional.isPresent()) {
 						stock = stockOptional.get();
@@ -141,10 +143,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 					purchaseResponseDTO.setTotalprice(totalPrice);
 					purchaseResponseDTO.setUserId(purchaseReqDTO.getUserId());
 
-				} else {
-					throw new ApplicationException("Transaction is not valid");
+				} 
+				else {
+					throw new ApplicationException("Provided transaction is not valid");
 				}
-			} else {
+			} 
+			else {
 				throw new ApplicationException("Transaction is not valid");
 			}
 
