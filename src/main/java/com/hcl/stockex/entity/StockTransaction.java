@@ -29,7 +29,7 @@ private User userId;
 
 
 @Column(name = "stock_id")
-private String stockId;
+private Stock stockId;
 
 @Column(name = "quantaty")
 private Long quantaty;
