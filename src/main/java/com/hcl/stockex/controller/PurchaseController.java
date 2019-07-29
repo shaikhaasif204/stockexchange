@@ -46,13 +46,13 @@ public class PurchaseController {
 	private void validateRequest(PurchaseRequestDTO purchaseRequestDTO) throws ApplicationException{
 		
 		  if(StringUtils.isEmpty(purchaseRequestDTO.getStockName())) { 
-			  throw new ApplicationException(ERROR_MSG + "UserId"); 
+			  throw new ApplicationException(ERROR_MSG + "StockName"); 
 			  } 
 		  if(null == purchaseRequestDTO.getStockId()) {
 			  throw new ApplicationException(ERROR_MSG + "Stock Id"); 
 			  } 
 		  if(null == purchaseRequestDTO.getUserId()) { 
-			  throw new ApplicationException(ERROR_MSG + "Stock name");
+			  throw new ApplicationException(ERROR_MSG + "UserId");
 			  } 
 		  
 		  if(null == purchaseRequestDTO.getQuantityOfStock() || 0 >= purchaseRequestDTO.getQuantityOfStock()) { 

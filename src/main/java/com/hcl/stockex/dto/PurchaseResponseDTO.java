@@ -22,5 +22,19 @@ public class PurchaseResponseDTO {
 	private Double PerStockPrice;
 	
 	private Integer QuantityOfStock;
+	
+	private Integer status;
+
+	public PurchaseResponseDTO(Long userId, Long stockId, String stockName, String stockType, Double totalprice,
+			Double perStockPrice, Integer quantityOfStock) {
+		super();
+		UserId = userId;
+		StockId = stockId;
+		this.stockName = stockName;
+		this.stockType = stockType;
+		Totalprice = totalprice;
+		PerStockPrice = perStockPrice;
+		QuantityOfStock = quantityOfStock;
+	}
 
 }
