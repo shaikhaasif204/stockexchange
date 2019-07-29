@@ -16,5 +16,7 @@ public class PurchaseRequestDTO {
 	private String stockName;
 	
 	private Integer QuantityOfStock;
+	
+	private Integer status;
 
 }
