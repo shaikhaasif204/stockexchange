@@ -14,10 +14,6 @@ public class PurchaseRequestDTO {
 	private Long StockId;
 	
 	private String stockName;
-
-	private String stockType;
-	
-	private Double PerStockPrice;
 	
 	private Integer QuantityOfStock;
 
