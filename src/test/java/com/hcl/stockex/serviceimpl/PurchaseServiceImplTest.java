@@ -120,4 +120,35 @@ public class PurchaseServiceImplTest {
 		when(stockTransactionRepository.save(stockTransaction)).thenReturn(savedStockTransaction);
 		assertNotNull(purchaseServiceImpl.purchaseStock(purchaseRequestDTO));
 	}
+	
+	@Test
+	public void testCOmpleteTrnxIfPurchaseDetailsAreCorrect() throws ApplicationException {
+		StockTransaction stockTransaction = new StockTransaction();
+		purchaseRequestDTO.setUserId(1L);
+		purchaseRequestDTO.setStockId(1L);
+		purchaseRequestDTO.setQuantityOfStock(100);
+		purchaseRequestDTO.setStatus(RequestStatusUtil.EXECUTED);
+		User user = new User();
+		user.setId(2L);
+		Optional<User> userOpt = Optional.of(user);
+		when(userRepository.findById(purchaseRequestDTO.getUserId())).thenReturn(userOpt);
+		
+		Stock stock = new Stock();
+		//stock.setId(1L);
+		stock.setStockName("SBI Homes");
+		stock.setStockType("Trading");
+		stock.setConfirmPrice(235.0);
+		stock.setExecutePrice(26.0);
+		stock.setPurchasePrice(25.0);
+		stockTransaction.setStock(stock);
+		stockTransaction.setUser(user);
+		stockTransaction.setQuantity(100);
+		stockTransaction.setStatus(RequestStatusUtil.REVIEWED);
+		Optional<Stock> stockTransact = Optional.of(stock);
+		//StockTransaction savedStockTransaction = new StockTransaction();
+		
+		when(stockRepository.findById(purchaseRequestDTO.getStockId())).thenReturn(stockTransact);
+		when(stockTransactionRepository.getTrnxByUserIdAndStockId(purchaseRequestDTO.getUserId(), purchaseRequestDTO.getStockId())).thenReturn(stockTransaction);
+		assertNotNull(purchaseServiceImpl.completeTrnx(purchaseRequestDTO));
+	}
 }
