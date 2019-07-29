@@ -13,6 +13,7 @@ import com.hcl.stockex.entity.StockTransaction;
 import com.hcl.stockex.repository.StockTransactionRepository;
 import com.hcl.stockex.repository.UserRepository;
 import com.hcl.stockex.service.TransactionService;
+import com.hcl.stockex.util.RequestStatusUtil;
 
 @Service
 public class TransactionServiceImpl implements TransactionService{
@@ -28,7 +29,7 @@ public class TransactionServiceImpl implements TransactionService{
 		ResponseDTO responseDTO = new ResponseDTO();
 		
 		if((userRepository.findById(userId).isPresent())) {
-			List<StockTransaction> history = stockTransactionRepository.findAllByUserId(userId);
+			List<StockTransaction> history = stockTransactionRepository.findAllByUserId(userId, RequestStatusUtil.EXECUTED);
 			
 			List<PurchaseResponseDTO> purchaseResponseDTOList = history.stream().map(i -> new PurchaseResponseDTO(i.getUser().getId(),i.getStock().getId(),
 					i.getStock().getStockName(),i.getStock().getStockType(),i.getTotalPrice(),i.getStockPrice(),i.getQuantity())).collect(Collectors.toList());

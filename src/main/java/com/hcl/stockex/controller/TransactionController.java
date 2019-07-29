@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.stockex.dto.ResponseDTO;
 import com.hcl.stockex.exception.ApplicationException;
-import com.hcl.stockex.repository.UserRepository;
 import com.hcl.stockex.serviceimpl.TransactionServiceImpl;
 
 @RestController
