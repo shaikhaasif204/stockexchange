@@ -1,5 +1,18 @@
 package com.hcl.stockex.controller;
 
+<<<<<<< HEAD
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.MockitoJUnitRunner;
+
+@RunWith(MockitoJUnitRunner.class)
+public class StockControllerTest {
+
+	@InjectMocks
+	StockController stockController;
+	
+=======
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
@@ -25,10 +38,13 @@ public class StockControllerTest {
 	
 	ResponseDTO responseDTO = new ResponseDTO();
 	
+>>>>>>> ca8a83798463295e2754116c362038a3f798bc38
 	@Before
 	public void setUp() {
 		
 	}
+<<<<<<< HEAD
+=======
 	
 	@Test
 	public void testgetAllStockDetails() throws ApplicationException {
@@ -37,4 +53,5 @@ public class StockControllerTest {
 		
 	}
 
+>>>>>>> ca8a83798463295e2754116c362038a3f798bc38
 }
