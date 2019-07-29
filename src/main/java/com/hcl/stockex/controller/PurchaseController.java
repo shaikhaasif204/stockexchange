@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.stockex.dto.PurchaseRequestDTO;
+import com.hcl.stockex.dto.ResponseDTO;
 import com.hcl.stockex.exception.ApplicationException;
 import com.hcl.stockex.service.PurchaseService;
 
@@ -32,8 +33,13 @@ public class PurchaseController {
 	}
 	
 	@PutMapping("/review")
-	public ResponseEntity<Object> reviewPurchase(){
-		return new ResponseEntity<Object>(null, HttpStatus.OK);
+	public ResponseEntity<Object> reviewPurchase(@RequestBody PurchaseRequestDTO purchaseRequestDTO) throws ApplicationException{
+		validateRequest(purchaseRequestDTO);
+		ResponseDTO responseDTO = purchaseService.reviewPurchase(purchaseRequestDTO);
+		if(null != responseDTO.getData()) {
+			return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+		}
+		throw new ApplicationException("Please enter valid details");
 	}
 	
 	
