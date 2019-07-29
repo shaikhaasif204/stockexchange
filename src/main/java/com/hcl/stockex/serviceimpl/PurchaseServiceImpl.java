@@ -39,7 +39,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 		Optional<StockTransaction> stockTransaction = stockTransactionRepository.getTransactionByUserIdAndStockId(purchaseRequestDTO.getUserId(), purchaseRequestDTO.getStockId(), RequestStatusUtil.INITIATED);
 		if(stockTransaction.isPresent()) {
 			StockTransaction transaction = stockTransaction.get();
-			PurchaseResponseDTO purchaseResponseDTO = new PurchaseResponseDTO(transaction.getUser().getId(), transaction.getStock().getId(), transaction.getStock().getStockName(), transaction.getStock().getStockType(), (transaction.getStock().getConfirmPrice()*transaction.getQuantity()), transaction.getStock().getConfirmPrice(), transaction.getQuantity());
+			PurchaseResponseDTO purchaseResponseDTO = new PurchaseResponseDTO(transaction.getUser().getId(), transaction.getStock().getId(), transaction.getStock().getStockName(), transaction.getStock().getStockType(), (transaction.getStock().getConfirmPrice()*transaction.getQuantity()), transaction.getStock().getConfirmPrice(), transaction.getQuantity(),transaction.getStatus());
 			transaction.setStatus(RequestStatusUtil.REVIEWED);
 			stockTransactionRepository.save(transaction);
 			responseDTO.setMessage("Review your order");
