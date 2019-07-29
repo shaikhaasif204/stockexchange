@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.hcl.stockex.dto.ResponseDTO;
+import com.hcl.stockex.exception.ApplicationException;
 import com.hcl.stockex.serviceimpl.TransactionServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -29,7 +30,7 @@ public class TransactionControllerTest {
 	}
 	
 	@Test
-	public void testGetHistoryIfUserIdIsCorrect() {
+	public void testGetHistoryIfUserIdIsCorrect() throws ApplicationException {
 		assertNotNull(transactionController.getHistory(1L));
 		
 	}
