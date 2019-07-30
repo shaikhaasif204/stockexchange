@@ -88,9 +88,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 		transaction.setStock(stock);
 		transaction.setUser(user);
 		
-	    StockTransaction savedTransaction = stockTransactionRepository.save(transaction);
+	   // StockTransaction savedTransaction = stockTransactionRepository.save(transaction);
 	    
-	    BeanUtils.copyProperties(savedTransaction, responseObject);
+	    BeanUtils.copyProperties(stockTransactionRepository.save(transaction), responseObject);
 	    responseObject.setUserId(user.getId());
 	    responseObject.setPerStockPrice(stock.getPurchasePrice());
 	    responseObject.setQuantityOfStock(purchaseRequestDTO.getQuantityOfStock());
