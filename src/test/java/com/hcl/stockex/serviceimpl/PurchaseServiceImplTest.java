@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.hcl.stockex.dto.PurchaseRequestDTO;
@@ -93,7 +94,37 @@ public class PurchaseServiceImplTest {
 		assertNotNull(purchaseServiceImpl.reviewPurchase(purchaseRequestDTO));
 	}
 	
-	
+	@Test
+	public void testPurchaseStockIfPurchaseDetailsAreCorrect() throws ApplicationException {
+		StockTransaction stockTransaction = new StockTransaction();
+		purchaseRequestDTO.setUserId(1L);
+		purchaseRequestDTO.setStockId(1L);
+		purchaseRequestDTO.setQuantityOfStock(100);
+		User user = new User();
+		user.setId(2L);
+		Optional<User> userOpt = Optional.of(user);
+		when(userRepository.findById(purchaseRequestDTO.getUserId())).thenReturn(userOpt);
+		
+		Stock stock = new Stock();
+		//stock.setId(1L);
+		stock.setStockName("SBI Homes");
+		stock.setStockType("Trading");
+		stock.setConfirmPrice(235.0);
+		stock.setPurchasePrice(25.0);
+		stockTransaction.setStock(stock);
+		stockTransaction.setUser(user);
+		stockTransaction.setQuantity(100);
+		stockTransaction.setId(2L);
+		stockTransaction.setStockPrice(25.0);
+		stockTransaction.setTotalPrice(2500.0);
+		stockTransaction.setStatus(1);
+		Optional<Stock> stockTransact = Optional.of(stock);
+		StockTransaction savedStockTransaction = new StockTransaction();
+		savedStockTransaction.setId(1L);
+		when(stockRepository.findById(purchaseRequestDTO.getStockId())).thenReturn(stockTransact);
+		when(stockTransactionRepository.save(Mockito.any(StockTransaction.class))).thenReturn(stockTransaction);
+		assertNotNull(purchaseServiceImpl.purchaseStock(purchaseRequestDTO));
+	}
 	
 	@Test
 	public void testCOmpleteTrnxIfPurchaseDetailsAreCorrect() throws ApplicationException {
